@@ -1,0 +1,102 @@
+// ZADATAK:
+//
+//
+// Definirana je klasa Prekidac. Izradite:
+// - konstruktor klase, kojim se prekidac postavlja u 
+//   ukljuceno stanje
+// - funkcije Ukljuci() i Iskljuci()
+// - funkciju Ukljucen() koja vraca true ako je prekidac 
+//   ukljucen, inace vraca false
+// - operator != 
+// - operator >> koji neka postavlja prekidac u stanje
+//   ukljucen ako sa toka procita string "on", u stanje 
+//   iskljucen ako sa toka procita string "off", a inace
+//   ostavlja stanje nepromijenjeno
+//
+// Napisite funkciju main(), te u njoj iskoristite kompletnu
+// funkcionalnost klase Prekidac.
+// 
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// Ne mijenjajte nista iznad ove linije!
+
+// ukljucite potrebne biblioteke...
+
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+class  Prekidac {
+	bool m_ukljucen;
+public:
+	Prekidac();
+	void Ukljuci();
+	void Iskljuci();
+	bool Ukljucen();
+	Prekidac& operator != (const Prekidac& a);
+};
+Prekidac::Prekidac()
+{
+	m_ukljucen = true;
+
+
+ }
+
+void Prekidac::Ukljuci()
+{
+	m_ukljucen = true;
+
+}
+void Prekidac::Iskljuci()
+{
+	m_ukljucen = false;
+
+}
+bool Prekidac::Ukljucen()
+{
+	if (m_ukljucen == true)
+		return true;
+	else
+		return false;
+
+}
+Prekidac& Prekidac::operator !=( const Prekidac& a)
+{
+	if (a.m_ukljucen == true)
+	{
+		m_ukljucen = false;
+		
+	}
+	else
+	{
+		m_ukljucen = true;
+	}
+	return *this; //vraca sebe
+}
+istream& operator >> (istream& s, Prekidac& p)
+{
+	string temp;
+	if (s >> temp)
+	{
+		if (temp == "on")
+		{ p.Ukljuci();
+		cout << "Ukljucen";
+		}
+			
+		else if (temp == "off")
+			p.Iskljuci();
+
+	}
+	return s;
+}
+int main() {
+	Prekidac t1;
+	Prekidac t2;
+	t2 != t1;
+	cin >> t2;
+	if (t1.Ukljucen() == t2.Ukljucen())
+		cout << "isti";
+	else
+		cout << "ne";
+
+	return 0;
+}
