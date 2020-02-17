@@ -1,0 +1,30 @@
+// ZADATAK:
+//
+//
+// Napisite program kojim se sadrzaj jedne tekstualne datoteke 
+// kopira u drugu, na nacin da se u ciljanu datoteku kopiraju samo
+// parni redovi.
+// 
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// Ne mijenjajte nista iznad ove linije!
+
+// ukljucite potrebne biblioteke...
+
+
+#include<iostream>
+#include<vector>
+#include<fstream>
+
+using namespace std;
+
+int main() {
+	bool parni = true;
+
+	ifstream input;
+	input.open("petra.txt"); //88 zadatak otvaranje datoteke
+
+	ofstream fTxt("petra2.txt");
+
+
+	return 0;
+}
