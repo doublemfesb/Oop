@@ -1,0 +1,94 @@
+// ZADATAK:
+//
+//
+// Deklarirana je klasa Adresa koja sadrzi ime i adresu osobe.
+// Nasljedjivanjem od klase Adresa napravite klasu Tekuci koja
+// sadrzi podatke o tekucem racunu osobe.
+// Klasa Tekuci neka sadrzi jos jednu dodatnu varijablu imena
+// IBAN tipa string. Varijabla IBAN neka bude privatna varijabla,
+// koja mora biti dužine 21 znaka, a prva dva znaka trebaju biti "HR".
+// Za klasu Tekuci definirajte:
+// Definirajte:
+//  a)	konstruktor, kojim se IBAN inicijalizira na prazan string
+//	b)  set i get funkcije za varijablu IBAN.
+//  b)	kopirni konstruktor
+// U main funkciji napisite primjer koristenja klase Tekuci i
+// svih njenih funkcija.
+// 
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// Ne mijenjajte nista iznad ove linije!
+
+// ukljucite potrebne biblioteke...
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+
+class Adresa {
+public:
+	string ime;
+	string ulica;
+	string grad;
+
+	Adresa() { ime = ulica = grad = ""; }
+	Adresa(const Adresa& temp) {
+		ime = temp.ime;
+		ulica = temp.ulica;
+		grad = temp.grad;
+	}
+};
+
+class Tekuci : public Adresa {
+
+private :string  IBAN;
+
+public:Tekuci() {
+			IBAN = "";
+		};
+		void Set(string a);
+		string GetI();
+		Tekuci(Tekuci& t); 
+		
+};
+
+void Tekuci :: Set(string a)
+{
+	if (a[0] == 'H' && a[1] == 'R' && a.length() == 5)//trebalo bi bit 21 al kome se da
+		IBAN = a; // a stavljamo u iban koji je prazan!!!!!
+	else
+		cout << "Greska!!" << endl<< a.length()<<endl;
+
+
+}
+
+//trebalo bi napravit get i set za ime, ulicu i grad
+string Tekuci::GetI()
+{
+
+	return IBAN;
+}
+
+Tekuci::Tekuci(Tekuci& t) // kopirni konstruktor
+{
+	ime = t.ime;
+	ulica = t.ulica;
+	grad = t.grad;
+	IBAN = t.IBAN;
+	
+}
+
+int main() {
+
+	Tekuci t;
+	string a;
+	cin >> a;
+
+	t.Set(a);
+	a = t.GetI();
+	cout <<"t1"<< a<< endl;
+	Tekuci t2(t); //pozivamo kopirni, kopiramo t1 u t2
+	a =t2.GetI();
+	cout <<"t2"<< a << endl;
+
+}
