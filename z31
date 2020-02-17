@@ -1,0 +1,55 @@
+// ZADATAK:
+//
+//
+// Napisite funkciju, kojom se iz jednog vektora V formiraju dva vektora: 
+// V1 treba sadrzavati neparne, a vektor V2 parne elemente vektora.
+// U funkciji vektore V1 i V2 sortirajte pomocu STL funkcije sort().
+// Napisite main() funkciju sa primjerom koristenja funkcije Razdijeli_vektor().
+// 
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// Ne mijenjajte nista iznad ove linije!
+
+// ukljucite potrebne biblioteke...
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+typedef vector<int> Vec;
+
+void Razdijeli_vektor(Vec& V, Vec& V1, Vec& V2) 
+{
+
+	for (int i = 0; i < V.size(); i++)
+	{
+		if (V[i] % 2 == 0)
+		{
+			V1.push_back(V[i]);
+		}
+		else
+			V2.push_back(V[i]);
+	}
+	sort(V1.begin(), V1.end());
+	sort(V2.begin(), V2.end());
+
+}
+
+int main() {
+	int i;
+
+	Vec V, V1, V2;
+	V = { 1,2,3,4,5,6,7,8,9 };
+	Razdijeli_vektor(V, V1, V2);
+	cout << "parni" << endl;
+		for (i = 0; i < V1.size(); i++)
+	{
+		cout << V1[i] << endl;
+	}
+		cout << "neparni" << endl;
+		for (i = 0; i < V2.size(); i++)
+		{
+			cout << V2[i];
+		}
+	return 0;
+}
