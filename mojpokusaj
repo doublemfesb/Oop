@@ -19,6 +19,7 @@
 
 
 #include<iostream>
+#include<string.h>
 using namespace std;
 
 class Adresa {
@@ -34,7 +35,7 @@ public:
 		grad = temp.grad;
 	}
 };
-class Tekuci:public Adresa
+class Tekuci :public Adresa
 {
 private:
 	string IBAN;
@@ -98,11 +99,20 @@ int main()
 {
 	Tekuci t;
 	string a;
+	string ime;
 	cout << "Unesite IBAN:\t" << endl;
 	cin >> a;
 	t.SetI(a);
 	cout << "t1" << a << endl;
-	Tekuci t2(t);
+	Tekuci t2 = t;
 	a = t2.GetI();
 	cout << "t2" << a << endl;
+
+	cout << "Unesite ime:\t" << endl;
+	cin >> ime;
+	t.SetU(ime);
+	cout << "t1" << ime << endl;
+	Tekuci t3(t);
+	ime = t3.GetU();
+	cout << "t2" << ime << endl;
 }
