@@ -1,0 +1,131 @@
+#include <iostream>
+#include<fstream>
+#include<string>
+
+using namespace std;
+
+class Razlomak
+{
+private:
+	int brojnik, nazivnik;
+public:
+	Razlomak();
+    Razlomak(int br, int naz=1);
+	int Brojnik() const;
+	int Nazivnik() const;
+	void SetBrojnik(int b);
+	void SetNaz(int n);
+	friend int nzm(int a, int b);
+
+};
+Razlomak::Razlomak()
+{
+	brojnik = 0;
+	nazivnik = 1;
+
+}
+Razlomak::Razlomak(int br, int naz)
+{
+	if (naz != 0)
+	{
+		brojnik = br;
+		nazivnik = naz;
+	}
+	else
+		cout << "Nazivnik ne smije biti 0!" << endl;
+}
+int Razlomak::Brojnik() const
+{
+	return brojnik;
+}
+int Razlomak::Nazivnik() const
+{
+	return nazivnik;
+}
+void Razlomak::SetBrojnik(int b)
+{
+	brojnik = b;
+}
+void Razlomak::SetNaz(int n)
+{
+	nazivnik=n;
+}
+Razlomak operator* (const Razlomak& r, const Razlomak& s)
+{
+	int a = r.Brojnik();
+	int b = r.Nazivnik();
+	int c = s.Brojnik();
+	int d = s.Nazivnik();
+	return Razlomak(a * c, b * d);
+}
+int nzm(int a, int b)
+{
+	int t;
+	while (b != 0)
+	{
+		t = b;
+		b = a % b;
+		a = t;
+	}
+	return a;
+}
+Razlomak operator + (const Razlomak& r, const Razlomak& s)
+{
+	int a = r.Brojnik();
+	int b = r.Nazivnik();
+	int c = s.Brojnik();
+	int d = s.Nazivnik();
+
+	int brojnik = a * d + c * b;
+	int nazivnik = b * d;
+	int djelitelj = nzm(brojnik, nazivnik);
+	return Razlomak((brojnik / djelitelj), (nazivnik / djelitelj));
+}
+Razlomak operator - (const Razlomak& r, const Razlomak& s)
+{
+	int a = r.Brojnik();
+	int b = r.Nazivnik();
+	int c = s.Brojnik();
+	int d = s.Nazivnik();
+
+	int brojnik = a * d - c * b;
+	int nazivnik = b * d;
+
+	int djelitelj = nzm(brojnik, nazivnik);
+	return Razlomak((brojnik / djelitelj), (nazivnik / djelitelj));
+}
+ostream& operator << (ostream& out, const Razlomak& s)
+{
+	out << s.Brojnik()<<"/"<< s.Nazivnik();
+	return out;
+
+}
+istream& operator>>(istream& in, Razlomak& r)
+{
+	int b, n;
+	char c;
+	if (in >> b >> c >> n)
+	{
+		 r.SetBrojnik(b);
+		 r.SetNaz(n);
+
+	}
+	return in;
+}
+int main()
+
+{
+	Razlomak r, s;
+	cout << "Unesi razlomak u obliku a/b: " << endl;
+	cin >> r;
+	cout << "Unesi razlomak u obliku a/b: " << endl;
+	cin >> s;
+
+	Razlomak suma = r + s;
+	Razlomak produkt = r * s;
+	cout << r << "+" << s << "=" << suma << endl;
+	cout << r << "*" << s << "=" << produkt << endl;
+
+
+	return 0;
+}
