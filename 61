@@ -1,0 +1,63 @@
+#include <iostream>
+#include<fstream>
+#include<string>
+
+using namespace std;
+
+class Niz
+{
+public:
+	Niz(int size = 5);
+	Niz(Niz& c);
+	void SetAt(int index, int val);
+	int GetAt(int index);
+	int& operator[](int index);
+	Niz& operator = (Niz& c);
+private:
+	int* m_array;
+	int m_size;
+
+};
+Niz::Niz(int size)
+{
+	m_array = new int[size];
+
+	m_size = size;
+}
+Niz& Niz::operator = (Niz& c)
+{    
+	m_size = c.m_size;
+	int i;
+	for (i = 0; i < m_size; i++)
+	{
+		m_array[i] = c.m_array[i];
+	}
+	return *this;
+
+}
+Niz::Niz(Niz& c)
+{
+	m_size = c.m_size;
+	for (int i = 0; i < m_size; i++)
+	{
+		m_array[i] = c.m_array[i];
+	}
+}
+void Niz::SetAt(int index, int val)
+{
+	m_array[index] = val;
+}
+int Niz::GetAt(int index)
+{
+	return m_array[index];
+}
+int& Niz::operator[](int index)
+{
+	index = (index < m_size) ? index : m_size;
+	return m_array[index];
+}
+int main()
+
+{
+	return 0;
+}
