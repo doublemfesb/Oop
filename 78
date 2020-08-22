@@ -1,0 +1,59 @@
+#include <iostream>
+#include<fstream>
+#include <cmath>
+#include<string>
+
+using namespace std;
+
+class Circle
+{
+public:
+	Circle():m_radius(0){}
+	void SetRadius(int r) { m_radius = r; };
+	int GetRadius() { return m_radius; };
+	Circle& operator++();
+	Circle operator++(int unused);
+	friend bool operator == (Circle& c1, Circle& c2);
+	 
+protected:
+	int m_radius;
+};
+Circle& Circle::operator++()
+{
+	++m_radius;
+	return *this;
+}
+Circle Circle::operator++(int unused)
+{
+	Circle temp(*this);
+	++m_radius;
+	return temp;
+
+}
+bool operator == (Circle& c1, Circle& c2)
+{
+	if (c1.m_radius == c2.m_radius)
+		return true;
+	else
+		return false;
+}
+ostream& operator <<(ostream& s, Circle& c1) 
+{
+	s << c1.GetRadius() << endl;
+	return s;
+}
+istream& operator>>(istream& s, Circle& c1)
+{
+	int temp;
+	if (s >> temp) {
+		c1.SetRadius(temp);
+	}
+	return s;
+}
+int main()
+
+{
+	
+	return 0;
+}
+
