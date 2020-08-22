@@ -1,0 +1,74 @@
+#include <iostream>
+#include<fstream>
+#include <cmath>
+#include <iomanip>
+#include<string>
+
+using namespace std;
+
+class Prekidac {
+private:
+	bool m_iskljucen;
+public:
+	Prekidac();
+	Prekidac(Prekidac& c);
+	void Ukljuci();
+	void Iskljuci();
+	bool Ukljucen();
+	bool operator == (Prekidac& c);
+	friend ostream& operator <<(ostream& out, Prekidac& c);
+};
+Prekidac::Prekidac()
+{
+	m_iskljucen = true;
+}
+Prekidac::Prekidac(Prekidac& c)
+{
+	m_iskljucen = c.m_iskljucen;
+}
+void Prekidac::Ukljuci()
+{
+	m_iskljucen = false;
+}
+void Prekidac::Iskljuci()
+{
+	m_iskljucen = true;
+}
+bool Prekidac::Ukljucen()
+{
+	if (m_iskljucen == false)
+		return true;
+	else
+		return false;
+}
+bool Prekidac::operator ==(Prekidac& c)
+{
+	if (m_iskljucen == c.m_iskljucen)
+	{
+		return true;
+	}
+	else
+		return false;
+}
+ostream& operator <<(ostream& out, Prekidac& c)
+{
+	if (c.m_iskljucen == true)
+		out << "Iskljucen"<<endl;
+	else
+		out << "Ukljucen"<<endl;
+	return out;
+}
+int main()
+
+{
+	Prekidac p;
+	p.Ukljuci();
+	cout << p.Ukljucen() << endl;
+	cout << p;
+	Prekidac c;
+	c.Iskljuci();
+	bool  d = p == c;
+	cout << d << endl;
+	return 0;
+}
+
