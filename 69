@@ -1,0 +1,65 @@
+#include <iostream>
+#include<fstream>
+#include <cmath>
+#include <iomanip>
+#include<string>
+
+using namespace std;
+
+class Complex
+{public:
+	double real, imag;
+	Complex() : real(0), imag(0) {};
+	Complex(const Complex& c);
+	double Mag() const;
+	double Phase() const;
+	Complex& operator =(const Complex& c);
+};
+Complex::Complex(const Complex& c)
+{
+	real = c.real;
+	imag = c.imag;
+}
+double Complex::Mag()const 
+{
+	double d = sqrt(real * real + imag * imag);
+	return d;
+
+}
+double Complex::Phase()const
+{
+	return atan(imag / real);
+
+}
+ostream& operator <<(ostream& out, const Complex& x)
+{
+	out << x.real;
+	if (x.imag >= 0)
+	{
+		cout << "+j";
+	}
+	else
+		cout << "-j";
+	cout << abs(x.imag);
+	return out;
+}
+Complex& Complex::operator =(const Complex& c) 
+{
+	real = c.real;
+	imag = c.imag;
+	return *this;
+}
+int main()
+
+{
+	Complex a;
+	a.real = 2;
+	a.imag = -3;
+	Complex b(a);
+	Complex c;
+	c = b;
+	cout << b.Mag() << " " << b.Phase() << endl;
+	cout << c;
+	return 0;
+}
+
