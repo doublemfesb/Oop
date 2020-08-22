@@ -1,0 +1,75 @@
+#include <iostream>
+#include<fstream>
+#include <cmath>
+#include<string>
+
+using namespace std;
+
+class Point2D
+{
+public:
+	Point2D();
+	Point2D(Point2D& c);
+	void SetX(double x);
+	void SetY(double y);
+	double GetX();
+	double GetY();
+protected:
+	double m_x, m_y;
+
+};
+Point2D::Point2D()
+{
+	m_x = 0;
+	m_y = 0;
+}
+Point2D::Point2D(Point2D& c)
+{
+	m_x = c.m_x;
+	m_y = c.m_y;
+}
+void Point2D::SetX(double x)
+{
+	m_x = x;
+}
+void Point2D::SetY(double y)
+{
+	m_y = y;
+}
+double  Point2D::GetX()
+{
+	return m_x;
+}
+double  Point2D::GetY()
+{
+	return m_y;
+}
+class Point3D: public Point2D
+{
+public:
+	Point3D() { m_z = 0; }
+	Point3D(Point3D& c):Point2D(c) { m_z = c.m_z; }
+	void SetZ(double z) { m_z = z; }
+	double GetZ() { return m_z; }
+	double Distance();
+protected:
+	double m_z;
+};
+double Point3D::Distance()
+{
+	return sqrt(m_x * m_x + m_y * m_y + m_z * m_z);
+}
+
+int main()
+
+{
+	Point3D d;
+	d.SetX(3);
+	d.SetY(4);
+	d.SetZ(5);
+	cout << d.Distance() << endl;
+	Point3D a(d);
+	cout << a.Distance() << endl;
+	return 0;
+}
+
