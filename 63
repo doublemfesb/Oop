@@ -1,0 +1,62 @@
+#include <iostream>
+#include<fstream>
+#include<string>
+
+using namespace std;
+
+class Pravokutnik
+{
+public:
+	Pravokutnik();
+	Pravokutnik& operator=(const Pravokutnik& p);
+	int GetSirina();
+	int GetVisina();
+
+	int x1, y1, x2, y2;
+};
+ 
+Pravokutnik::Pravokutnik()
+{
+	x1 = y1 = 0;
+	x2 = y2 = 1;
+}
+Pravokutnik& Pravokutnik::operator =(const Pravokutnik& p)
+{
+	x1 = p.x1;
+	x2 = p.x2;
+	y1 = p.y1;
+	y2 = p.y2;
+
+	return *this;
+
+}
+int Pravokutnik::GetSirina()
+{
+	return x2 - x1;
+}
+int Pravokutnik::GetVisina()
+{
+	return y2 - y1;
+}
+istream& operator >>(istream& s, Pravokutnik& c1)
+{
+	int temp1, temp2, temp3, temp4;
+	if (s >> temp1 >> temp2 >> temp3 >> temp4)
+	{
+		c1.x1 = temp1;
+		c1.y1 = temp2;
+		c1.x2 = temp3;
+		c1.y2 = temp4;
+	}
+	return s;
+}
+int main()
+
+{
+	Pravokutnik s;
+	int a, b, c, d;
+	cin >> s;
+	cout << s.GetSirina() << endl;
+
+	return 0;
+}
