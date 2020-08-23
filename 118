@@ -1,0 +1,36 @@
+#include <iostream>
+#include<fstream>
+#include <cmath>
+#include <iomanip>
+#include<string>
+#include <vector>
+#include <algorithm>
+#include <iterator>
+using namespace std;
+typedef vector<string> Vec;
+void Razdijeli_vektor(Vec& V, Vec& Vshort, Vec& Vlong)
+{
+	Vec::iterator iter;
+	for (iter = V.begin(); iter != V.end(); iter++)
+	{
+		if ((*iter).length() < 10)
+		{
+			Vshort.push_back(*iter);
+		}
+		else
+			Vlong.push_back(*iter);
+	}
+}
+int main()
+{
+	Vec v = {"sigma", "beta"};
+	Vec v1;
+	Vec v2;
+	Razdijeli_vektor(v, v1, v2);
+	for (auto i = v1.begin(); i != v1.end(); ++i)
+		std::cout << *i << ' ';
+	
+	return 0;
+}
+
+
