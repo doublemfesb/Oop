@@ -1,0 +1,33 @@
+#include <iostream>
+#include<fstream>
+#include <cmath>
+#include <iomanip>
+#include<string>
+
+using namespace std;
+
+
+int main()
+
+{
+	ifstream ulaz;
+	ofstream izlaz;
+	int counter=0;
+	ulaz.open("ulaz.txt");
+	izlaz.open("izlaz.txt");
+	char c;
+	while (ulaz.get(c))
+	{
+		counter++;
+		if (c == '\n')
+		{
+			izlaz << "(" << counter-1 << ")" << endl;
+			counter = 0;
+		}
+		izlaz.put(c);
+	}
+	ulaz.close();
+	izlaz.close();
+	return 0;
+}
+
