@@ -1,0 +1,53 @@
+#include <iostream>
+#include<fstream>
+#include <cmath>
+#include <iomanip>
+#include<string>
+
+using namespace std;
+
+template<class T> class Circle 
+{
+public:
+	Circle() { m_radius = 0; };
+	Circle(T c) : m_radius(c){ };
+	void SetRadius(T r) { m_radius = r; };
+	T GetRadius() { return m_radius; };
+	Circle<T>& operator ++();
+	template<class T>
+	friend ostream& operator <<(ostream& s, const Circle<T>& c1);
+	template<class T>
+	friend istream& operator >>(istream& s, const Circle<T>& c1);
+
+protected:
+	T m_radius;
+};
+template<class T> Circle<T>& Circle<T>::operator ++()
+{
+	++m_radius;
+	return m_radius;
+
+}
+template<class T> ostream& operator <<(ostream& s, const Circle<T>& c1)
+{
+	s << c1.m_radius;
+	return s;
+}
+template<class T> istream& operator >>(istream& s, const Circle<T>& c1)
+{
+	T r;
+	if (s >> r)
+	{
+		c1.SetRadius(r);
+	}
+	return s;
+}
+int main()
+{
+	Circle <double> d(3);
+	cout << d;
+
+	return 0;
+}
+
+
