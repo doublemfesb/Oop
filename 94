@@ -1,0 +1,34 @@
+#include <iostream>
+#include<fstream>
+#include <cmath>
+#include <iomanip>
+#include<string>
+
+using namespace std;
+
+
+int main()
+
+{
+	ifstream ulaz;
+	ofstream izlaz;
+	ulaz.open("ulaz.txt");
+	izlaz.open("izlaz.txt");
+	char c;
+	while (ulaz.get(c))
+	{
+		if (c >= 65 && c <= 90)
+		{
+			c = tolower(c);
+		}
+		else if (c >= 97 && c <= 122)
+		{
+			c = toupper(c);
+		}
+		izlaz.put(c);
+	}
+	izlaz.close();
+	ulaz.close();
+	
+	return 0;
+}
