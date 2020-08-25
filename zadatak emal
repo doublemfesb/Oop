@@ -59,7 +59,7 @@ void Tekuci::Set(string input)
 {
 	auto b = input.begin(), e = input.end();
 
-	if ((b = find(b, e, '@')) != e &&
+	if ((find(b, e, '@')) != e &&
 		find(b, e, '.') != e)
 	{
 		cout << "Email accepted" << endl;
